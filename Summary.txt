@@ -1,0 +1,81 @@
+CSCI 570: Final Year Project
+
+Summary:
+
+○ Contribution 
+
+Jay Yogesh Harkhani - 9190064859
+• Developed the Basic DP Algorithm.
+• Developed the Efficient Algorithm. 
+• Wrote the Shell Script.
+• Wrote the function to build the strings from the given input file.
+• Documentation.
+
+Aman Vishal Jain - 2792744306
+• Developed the Basic DP Algorithm.
+• Developed the Efficient Algorithm.
+• Wrote the code for plotting the data of Time and Memory used.
+• Testing and integrating the code.
+• Documentation.
+
+
+○ Observations/ Analysis of the solution
+
+In the final project, we have shown 2 ways to solve the sequence alignment problem.
+
+Algorithm 1: Basic Dynamic programming solution
+In this algorithm, with the use of dynamic programming, we create a 2-dimensional array corresponding to the input strings for sequence alignment. Each cell corresponds to the minimized net penalty for the strings till OPT(i,j). 
+
+Recurrence relation:
+alpha: refers to a 2-dimensional array that returns the mismatch cost for 2 characters
+delta: refers to the gap penalty
+
+Base cases:
+Initialize OPT[i, 0]= iδ for each i
+Initialize OPT[0, j]= jδ for each j
+
+The minimum alignment costs satisfy the following recurrence for i ≥ 1
+and j ≥ 1:
+
+OPT(i, j) = min[alpha *xi*yj + OPT(i − 1, j − 1), δ + OPT(i − 1, j), δ + OPT(i, j − 1)].
+
+Solution:
+To get the solution we simply, trace back through the filled table, starting OPT[m][n]. 
+We can check for OPT(i,j) if    
+if it was filled using alpha *xi*yj + OPT(i − 1, j − 1),then go to (i-1, j-1)
+if it was filled using δ + OPT(i − 1, j), go to (i-1, j)
+if it was filled using δ + OPT(i, j − 1), go to (i, j-1)
+
+
+Analysis: 
+Let m be in the size of the first string, and n be the size of the second string.
+Then the running time is O(mn), since the output array has O(mn) entries, and at worst we spend constant time on each. The memory taken to solve the problem is O(m*n) and through our observations, we can see that as the size (m+n) of the inputs increases the memory consumption grows rapidly.
+
+
+Algorithm 2: Efficient solution using Dynamic programming and Divide and Conquer:
+
+In this solution, we rely on the fact that in a graph G,
+let f (i, j) denote the length of the shortest path from (0, 0) to (i, j) in the graph.
+let g(i, j) to be the length of the shortest path from (i, j) to (m, n) in G.
+then,
+The length of the shortest corner-to-corner path in G that passes through (i, j) is f (i, j) + g(i, j).
+
+We are diving the graph along its center column and computing the value of f (i, n/2) and g(i, n/2) for each i.
+
+Note: for finding the cost of f an g we use the Space-Efficient-Alignment. The idea behind this algorithm is to fill in an entry of the OPT array, in the Basic Dynamic solution we only need the information from the current column of OPT and the previous column of OPT.
+We then use a  m x 2 array, where [i, 0] array will hold the previous values the [i,1] holds the current values. After each iteration, the old values array is replaced by the current values array. In the last iteration, we return the current values array for f and g.
+
+The  Efficient solution then uses a loop to find out the minimum f (i, n/2) + g(i, n/2) for all i. We now know that this point (i,n/2) is included in the minimum cost solution for the graph.
+
+The next step is to use this point and divide the graph into 2 subproblems. And find the minimum( f (i, n/2) + g(i, n/2)) for the next 2 subproblems.
+
+Analysis:
+In this algorithm we are splitting the matrix based on the optimal point from the bottom left Matrix(0,0) to the top corner Matrix(m,n).
+In every iteration, we still calculate the values of the complete table as the algorithm.
+Thus, we have time complexity as :cmn+ cmn/2 + cmn/4 + cmn/8 + ... = 2cmn
+This can be seen in the CPUPlot.png file wherein the time taken by this algorithm is more as compared to the Basic DP algorithm.
+Time Complexity = O(2cmn) = O(m*n)
+Space complexity analysis: we use 2 * (n+1) rows at a time (each iteration)
+Therefore the space complexity of the algorithm is O(m+n).
+
+Thus this algorithm reduces the storage space drastically to solve the Sequence Alignment Problem. The space complexity reduces from O(mn) to O(m+n).
