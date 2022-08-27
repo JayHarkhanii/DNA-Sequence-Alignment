@@ -2,23 +2,6 @@ CSCI 570: Final Year Project
 
 Summary:
 
-○ Contribution 
-
-Jay Yogesh Harkhani - 9190064859
-• Developed the Basic DP Algorithm.
-• Developed the Efficient Algorithm. 
-• Wrote the Shell Script.
-• Wrote the function to build the strings from the given input file.
-• Documentation.
-
-Aman Vishal Jain - 2792744306
-• Developed the Basic DP Algorithm.
-• Developed the Efficient Algorithm.
-• Wrote the code for plotting the data of Time and Memory used.
-• Testing and integrating the code.
-• Documentation.
-
-
 ○ Observations/ Analysis of the solution
 
 In the final project, we have shown 2 ways to solve the sequence alignment problem.
